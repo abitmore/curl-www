@@ -4,6 +4,10 @@
 #include "css.t"
 
 <style type="text/css">
+.contents {
+  max-width: 90%;
+  overflow: auto;
+}
 a.vuln {
     color: black;
     font-size: 70%;
@@ -29,11 +33,10 @@ WHERE3(Docs, "/docs/", Releases, "/docs/reldocs.html", Vulnerabilities)
 TITLE(curl and libcurl vulnerabilities)
 <div class="relatedbox">
 <b>Related:</b>
-<br><a href="security.html">Security problems</a>
-<br><a href="/dev/secprocess.html">Security process</a>
-<br><a href="faq.html">FAQ</a>
-<br><a href="/changes.html">Changelog</a>
-<br><a href="releases.html">Releaselog</a>
+<br><a href="security.html">curl CVEs</a>
+<br><a href="vuln.json">CVEs as JSON</a>
+<br><a href="releases.html">Release log</a>
+<br><a href="/dev/vuln-disclosure.html">Vulnerability Disclosure</a>
 </div>
 
 <p>
@@ -42,8 +45,13 @@ TITLE(curl and libcurl vulnerabilities)
  disclosed <a href="security.html">vulnerabilities</a>.
 
 <p>
- Each version number link shows a vulnerability summary for that specific
+ Each version number links a vulnerability summary for that specific
  release. Each vulnerability in the table header links to more details.
+<p>
+  Green: <span style="color: green;">&FilledSmallSquare;</span> severity low.
+  Blue: <span style="color: blue;">&FilledSmallSquare;</span> severity medium.
+  Red: <span style="color: red;">&FilledSmallSquare;</span> severity high.
+  Black: <span style="color: black;">&FilledSmallSquare;</span> severity critical.
 <p>
 #include "vuln.gen"
 

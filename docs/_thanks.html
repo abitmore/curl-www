@@ -3,6 +3,12 @@
 <head> <title>curl - THANKS</title>
 #include "css.t"
 <link rel="STYLESHEET" type="text/css" href="thanks.css">
+<style type="text/css">
+.contents {
+  max-width: 90%;
+  overflow: auto;
+}
+</style>
 </head>
 
 #define CURL_DOCS
@@ -26,17 +32,15 @@ TITLE(Thanks for Your Contribution to the curl Project!)
 </div>
 
 <p>
- This project has been alive for many years. At least __THANKSNUM__ persons
-have provided code, feedback, advice etc that have improved curl. curl and
-libcurl would not be what they are today without the help of friendly people
-like this.
+ This project has been alive for many years. At least <b>__THANKSNUM__</b>
+persons have provided code, feedback, advice etc that have improved curl. curl
+and libcurl would not be what they are today without the help of friendly
+people like this.
 
 <p>
  If you have helped out but are missing in this list,
- please <a href="mailto:curl-web@haxx.se">tell us</a>! Note that this list may
- not include contributors who have used obvious fake names or strange aliases.
-
-<p>
+ please <a href="mailto:curl-web@haxx.se">tell us</a>!
+<p style="font-size: 80%;">
 
 #include "thanks.gen"
 

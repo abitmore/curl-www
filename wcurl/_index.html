@@ -1,0 +1,47 @@
+#include "_doctype.html"
+<html>
+<head> <title>wcurl</title>
+#include "css.t"
+</head>
+
+#define CURL_URL /wcurl
+
+#include "_menu.html"
+#include "setup.t"
+
+WHERE1(wcurl)
+
+<center><img src="/logo/wcurl-logo.svg" alt="wcurl logo" style="width:70%; padding-top: 8px; padding-bottom: 30px;">
+</center>
+
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="https://github.com/curl/wcurl">GitHub repo</a>
+<br><a href="manual.html">manpage</a>
+</div>
+<p>
+wcurl is a command line tool which lets you download URLs without having to
+remember any parameters.
+<p>
+Invoke wcurl with a list of URLs you want to download and wcurl will pick sane
+defaults; using curl under the hood.
+
+SUBTITLE(Download)
+<pre style="white-space: pre-wrap; word-break: keep-all; color: #e0e080; background: #000000; padding: 8px 8px 8px 8px;">
+$ curl -fLO https://github.com/curl/wcurl/releases/latest/download/wcurl
+$ chmod +x wcurl
+</pre>
+
+SUBTITLE(Download manpage)
+<pre style="white-space: pre-wrap; word-break: keep-all; color: #e0e080; background: #000000; padding: 8px 8px 8px 8px;">
+$ curl -fLO https://github.com/curl/wcurl/releases/latest/download/wcurl.1
+$ sudo mv wcurl.1 /usr/share/man/man1/wcurl.1
+</pre>
+
+SUBTITLE(Pronunciation)
+<p>
+ "double-u curl"
+
+#include "_footer.html"
+</body>
+</html>

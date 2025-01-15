@@ -8,9 +8,17 @@ mkdir -p download/archeology
 touch dl/data/databas.db
 
 if test ! -d cvssource; then
-  echo "specify full path to source code root dir"
+  echo "specify full path to curl source code root dir"
   read -r code
   ln -sf "${code}" cvssource
+fi
+
+if test ! -d trurl/trurl-www; then
+  git clone https://github.com/curl/trurl.git trurl/trurl-www
+fi
+
+if test ! -d wcurl/wcurl-repo; then
+  git clone https://github.com/curl/wcurl.git wcurl/wcurl-repo
 fi
 
 touch ca/cacert.pem
@@ -25,3 +33,4 @@ touch summary.t
 touch cvs.t
 touch keywords.txt
 touch table.t
+

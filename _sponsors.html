@@ -8,7 +8,7 @@
 }
 .silver {
     width: 400px;
-    max-height: 400px;
+    max-width: 100%;
     float: left;
     padding-right: 10px;
     padding-bottom: 10px;
@@ -17,24 +17,43 @@
 }
 
 .silver img {
-  max-width: 400px;
+    max-width: 400px;
+    height: auto;
 }
 
 .silver img[src$=".svg"], .silver svg {
-  width: 400px;
-  height: auto;
+    width: 400px;
+    height: auto;
 }
 
 .gold {
-    width: 500px;
+    width: 400px;
+    max-width: 100%;
     float: left;
-    padding-right: 20px;
-    padding-bottom: 20px;
+    margin: 10px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
     text-align: left;
 }
 
-.x:hover, svg:hover, img:hover {
+.top {
+    width: 500px;
+    max-width: 100%;
+    text-align: left;
+    margin: 10px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
+}
+
+.xx:hover, .x:hover, svg:hover, img:hover {
     background-color: transparent;
+}
+.x img {
+    width: 500px;
+    max-width: 100%;
+}
+
+.xx img {
+    width: 400px;
+    max-width: 100%;
 }
 </style>
 </head>
@@ -50,50 +69,66 @@ WHERE3(Docs, "/docs/", Who and Why, "/docs/whodocs.html", Sponsors)
 TITLE(Sponsors)
 <div class="relatedbox">
 <b>Related:</b>
+<br><a href="https://github.com/curl/curl/blob/master/docs/SPONSORS.md">Sponsor requirements</a>
 <br><a href="/donation.html">Donate</a>
 <br><a href="/docs/help-us.html">Help us</a>
 <br><a href="/docs/">Online Docs</a>
 </div>
 
-<p>
-  <a class="x" href="https://www.haxx.se/" rel="sponsored"><img src="pix/haxx.svg" width="500" height="169" border="0" alt="Haxx"></a>
-<p>
- Haxx is the primary sponsor of the curl project.
+<p> These are our best friends. The companies that help the curl project
+financially in different ways.
 
+<p style="clear: both;">
+
+<div class="top">
+ <a class="x" href="https://www.haxx.se/" rel="sponsored"><img src="pix/haxx.svg" border="0" alt="Haxx"></a>
 <p>
-<a class="x" href="https://www.wolfssl.com/" rel="sponsored"><img src="pix/wolfssl.svg" width="500" height="387" alt="wolfSSL"></a>
+ Haxx is the primary sponsor of the curl project
+</div>
+
+<div class="top">
+<a class="x" href="https://www.wolfssl.com/" rel="sponsored"><img src="pix/wolfssl.svg" alt="wolfSSL"></a>
 <p>
  wolfSSL employs <a href="https://daniel.haxx.se/">Daniel</a> and lets him
- spend paid work hours on curl.
+ spend paid work hours on curl
+</div>
 
-<p>
+<div class="top">
  <a class="x" href="https://www.fastly.com/" rel="sponsored"><img src="pix/fastly.svg" width="500" alt="Fastly"></a>
 <p>
- Fastly delivers the curl web site and web contents to the world.
-
+ Fastly delivers the curl website and web contents to the world
+</div>
+<div class="top">
+ <a class="x" href="https://www.github.com/" rel="sponsored"><img src="pix/top/github.svg" width="500" alt="GitHub"></a>
 <p>
- <a class="x" href="https://www.teamviewer.com/" rel="sponsored"><img src="pix/teamviewer.svg" width="700" alt="Teamviewer"></a>
+ GitHub sponsors CI infrastructure
+</div>
+
+<div class="top">
+ <a class="x" href="https://www.hackerone.com/internet-bug-bounty" rel="sponsored"><img src="pix/top/ibb.svg" width="500" alt="IBB"></a>
+<p>
+ The Internet Bug Bounty sponsors the curl bug bounty
+</div>
+ 
+<div class="top">
+ <a class="x" href="https://www.teamviewer.com/" rel="sponsored"><img src="pix/teamviewer.svg" width="500" alt="Teamviewer"></a>
 <p>
  Teamviewer sponsors test and CI infrastructure.
+</div>
+
+<p style="clear: both;">
 
 <div class="gold">
 SUBTITLE(Gold sponsor)
-<a class="x" href="https://elastic.co/" rel="sponsored"><img src="pix/gold/elastic-logo.svg" alt="Elastic"></a>
-<p> We're the company behind the Elastic Stack — that's Elasticsearch, Kibana, Beats, and Logstash.
+<a class="xx" href="https://elastic.co/" rel="sponsored"><img src="pix/gold/elastic-logo.svg" alt="Elastic"></a>
+<p> We are the company behind the Elastic Stack — that is Elasticsearch, Kibana, Beats, and Logstash.
 </div>
 
 <div class="gold">
 SUBTITLE(DNS sponsor)
 <p>
-  <a class="x" href="https://www.kirei.se/"><img src="pix/kirei.svg" width="400" alt="Kirei"></a>
+  <a class="xx" href="https://www.kirei.se/"><img src="pix/kirei.svg" alt="Kirei"></a>
 <p> Kirei sponsors DNS infrastructure
-</div>
-
-<div class="gold">
-SUBTITLE(WebSockets sponsor)
-<p>
-  <a class="x" href="https://www.corellium.com/"><img src="pix/corellium.svg" width="400" alt="Corellium"></a>
-<p> Corellium sponsors the WebSockets implementation
 </div>
 
 #if 0
@@ -105,36 +140,33 @@ SUBTITLE(WebSockets sponsor)
 
 <div style="clear: both;"></div>
 SUBTITLE(Silver sponsors)
-<!---- Silver start ----->
-<div class="silver"><p> <a class="x" href="https://icons8.com" rel="sponsored"><img src="pix/silver/icons8.svg" alt="icons8"></a></div>
-<div class="silver"><p> <a class="x" href="https://www.maid2clean.co.uk/domestic-cleaning/" rel="sponsored"><img src="pix/silver/maid2clean.svg" alt="maid2clean"></a></div>
-<div class="silver"><p> <a class="x" href="https://www.minitool.com" rel="sponsored"><img src="pix/silver/minitool-2.svg" alt="minitool-2"></a></div>
-<div class="silver"><p> <a class="x" href="https://www.airbnb.com/" rel="sponsored"><img src="pix/silver/airbnb.svg" alt="airbnb"></a></div>
+<!-- Silver start -->
+<div class="silver"><p> <a class="x" href="https://icons8.com/" rel="sponsored"><img src="pix/silver/icons8.svg" alt="Icons8"></a></div>
+<div class="silver"><p> <a class="x" href="https://www.minitool.com" rel="sponsored"><img src="pix/silver/minitool-2.svg" alt="Minitool-2"></a></div>
+<div class="silver"><p> <a class="x" href="https://www.airbnb.com/" rel="sponsored"><img src="pix/silver/airbnb.svg" alt="Airbnb"></a></div>
 <div class="silver"><p> <a class="x" href="https://www.crosswordsolver.com" rel="sponsored"><img src="pix/silver/CrosswordSolver.svg" alt="CrosswordSolver"></a></div>
-<div class="silver"><p> <a class="x" href="https://www.partitionwizard.com" rel="sponsored"><img src="pix/silver/partitionwizard-2.svg" alt="partitionwizard-2"></a></div>
-<div class="silver"><p> <a class="x" href="https://www.premium-minds.com" rel="sponsored"><img src="pix/silver/premium-minds.svg" alt="premium-minds"></a></div>
-<div class="silver"><p> <a class="x" href="https://ipinfo.io/" rel="sponsored"><img src="pix/silver/ipinfo.svg" alt="ipinfo"></a></div>
-<div class="silver"><p> <a class="x" href="https://serpapi.com" rel="sponsored"><img src="pix/silver/serpapi.svg" alt="serpapi"></a></div>
-<div class="silver"><p> <a class="x" href="https://mowcapital.com" rel="sponsored"><img src="pix/silver/mowcapital.svg" alt="mowcapital"></a></div>
-<div class="silver"><p> <a class="x" href="https://proxy-hub.com/" rel="sponsored"><img src="pix/silver/proxyhub.svg" alt="proxyhub"></a></div>
-<div class="silver"><p> <a class="x" href="https://cryptotracker.com" rel="sponsored"><img src="pix/silver/crypto-tracker.svg" alt="crypto-tracker"></a></div>
-<div class="silver"><p> <a class="x" href="https://www.sure.bet/casinos-not-on-gamstop/" rel="sponsored"><img src="pix/silver/surebet.png" alt="surebet"></a></div>
+<div class="silver"><p> <a class="x" href="https://www.partitionwizard.com" rel="sponsored"><img src="pix/silver/partitionwizard-2.svg" alt="Partitionwizard-2"></a></div>
+<div class="silver"><p> <a class="x" href="https://www.premium-minds.com" rel="sponsored"><img src="pix/silver/premium-minds.svg" alt="Premium-minds"></a></div>
+<div class="silver"><p> <a class="x" href="https://ipinfo.io/" rel="sponsored"><img src="pix/silver/ipinfo.svg" alt="Ipinfo"></a></div>
+<div class="silver"><p> <a class="x" href="https://serpapi.com" rel="sponsored"><img src="pix/silver/serpapi.svg" alt="Serpapi"></a></div>
+<div class="silver"><p> <a class="x" href="https://proxy-hub.com/" rel="sponsored"><img src="pix/silver/proxyhub.svg" alt="Proxyhub"></a></div>
+<div class="silver"><p> <a class="x" href="https://cryptotracker.com" rel="sponsored"><img src="pix/silver/crypto-tracker.svg" alt="Crypto-tracker"></a></div>
 <div class="silver"><p> <a class="x" href="https://iboysoft.com" rel="sponsored"><img src="pix/silver/iBoysoft.svg" alt="iBoysoft"></a></div>
-<div class="silver"><p> <a class="x" href="https://fitmymoney.com/" rel="sponsored"><img src="pix/silver/Fit-My-Money-vertical.svg" alt="Fit-My-Money-vertical"></a></div>
-<div class="silver"><p> <a class="x" href="https://awisee.agency" rel="sponsored"><img src="pix/silver/awisee.png" alt="awisee"></a></div>
-<div class="silver"><p> <a class="x" href="https://evpsys.com" rel="sponsored"><img src="pix/silver/evp.png" alt="evp"></a></div>
-<!-- Silver via other means -->
- <div class="silver"><p> <a class="x" href="https://www.airlock.com/" rel="sponsored"><img src="pix/silver/airlock.svg" alt="Airlock"></a></div>
- <div class="silver"><p> <a class="x" href="https://www.babiel.com/" rel="sponsored" aria-label="Babiel">
-#include "pix/silver/babiel.svg"
-</a></div>
-<!-- Silver-level but opencollective doesn't show (?) -->
- <div class="silver"><p> <a class="x" href="https://www.monkeybreadsoftware.de/" rel="sponsored"><img src="pix/silver/monkeybreadsoftware.jpg" alt="monkeybreadsoftware"></a></div>
- <!-- Silver on Github curl/curl -->
- <div class="silver"><p> <a class="x" href="https://eya.global" rel="sponsored" aria-label="EyA"><img src="pix/silver/EyA.png"></a></div>
+<div class="silver"><p> <a class="x" href="https://www.testarna.se/casino/utan-svensk-licens" rel="sponsored"><img src="pix/silver/testarna.png" alt="Testarna"></a></div>
+<div class="silver"><p> <a class="x" href="https://fineproxy.org/" rel="sponsored"><img src="pix/silver/fineproxy.jpg" alt="Fineproxy"></a></div>
+<div class="silver"><p> <a class="x" href="https://onelessthing.co.uk/" rel="sponsored"><img src="pix/silver/onelessthing.svg" alt="Onelessthing"></a></div>
+<div class="silver"><p> <a class="x" href="https://www.babiel.com/" rel="sponsored"><img src="pix/silver/babiel.svg" alt="Babiel"></a></div>
+<div class="silver"><p> <a class="x" href="https://zynk.it" rel="sponsored"><img src="pix/silver/zynk.svg" alt="Zynk"></a></div>
+<div class="silver"><p> <a class="x" href="https://www.open-systems.com" rel="sponsored"><img src="pix/silver/open-systems.svg" alt="Open-systems"></a></div>
 
-<!---- Silver end ----->
-<div style="clear: both;"></div>
+<!-- Silver via other means -->
+<!-- Silver-level but opencollective does not show (?) -->
+ <div class="silver"><p> <a class="x" href="https://www.monkeybreadsoftware.de/" rel="sponsored"><img src="pix/silver/monkeybreadsoftware-2.jpg" alt="monkeybreadsoftware"></a></div>
+ <div class="silver"><p> <a class="x" href="https://casino.xyz/" rel="sponsored"><img src="pix/silver/casinoxyz.png" alt="casino.xyz"></a></div>
+<!-- Silver for curl on github -->
+ <div class="silver"><p> <a class="x" href="https://route4me.com/" rel="sponsored"><img src="pix/silver/route4me.svg" alt="Route4Me"></a></div>
+<!-- Silver end -->
+<div style="clear: both; max-width: 40em; margin-left: auto; margin-right: auto;">
 SUBTITLE(Join in and Sponsor!)
 <p>
  Please consider sponsoring the project. Maintaining, bug tracking, hosting
@@ -159,7 +191,7 @@ SUBTITLE(Pledge)
  believe are beneficial for the project and its development. That includes but
  is not limiting us to bug-bounties, developer conferences, infrastructure,
  services and hardware.
-
+</div>
 #include "_footer.html"
 </body>
 </html>

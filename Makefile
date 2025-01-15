@@ -1,10 +1,10 @@
 ROOT=.
 
 # the latest stable version is:
-STABLE= 8.0.1
-RELDATE = "2023-03-20"
+STABLE= 8.11.1
+RELDATE = "2024-12-11"
 # The planned *next* release is:
-NEXTDATE = "2023-05-17"
+NEXTDATE = "2025-02-05"
 
 # generated file with binary package stats
 STAT = packstat.t
@@ -26,6 +26,7 @@ PAGES= \
  dashboard.html \
  dashboardd.html \
  dashboard5.html \
+ dashboard2.html \
  dashboard1.html \
  donation.html \
  download.html \
@@ -35,7 +36,6 @@ PAGES= \
  index.html \
  info \
  libs.html \
- mirrors.html \
  news.html \
  newslog.html \
  oldnews.html \
@@ -50,12 +50,15 @@ all: $(PAGES)
 	cd docs && make
 	cd libcurl && make
 	cd mail && make
-	cd mirror && make
 	cd rfc && make
 	cd dev && make
 	cd windows && make
+	cd qnx && make
+	cd snapshots && make
 	cd tiny && make
 	cd logo && make
+	cd trurl && make
+	cd wcurl && make
 
 head.html: _head.html $(MAINPARTS)
 	$(ACTION)
@@ -124,16 +127,15 @@ download2.html: _download2.html $(MAINPARTS) $(RELEASE) dl/files.html
 dl/files.html: dl/data/databas.db
 	cd dl; make
 
-changes.html: _changes.html docs/_menu.html $(MAINPARTS)
+changes.html: _changes.html docs/_menu.html $(MAINPARTS) splitchange.pl _single-head-template.html _single-foot-template.html changes.t changescss.t
 	$(ACTION)
+	./splitchange.pl
+	cd ch && $(MAKE)
 
 gethelp.html: _gethelp.html $(MAINPARTS)
 	$(ACTION)
 
 book.html: _book.html $(MAINPARTS)
-	$(ACTION)
-
-mirrors.html: _mirrors.html $(MAINPARTS)
 	$(ACTION)
 
 about.html: _about.html docs/_menu.html $(MAINPARTS)
@@ -149,6 +151,9 @@ dashboard.html: _dashboard.html dash.gen dashboard.t $(MAINPARTS)
 	$(ACTION)
 
 dashboard5.html: _dashboard5.html dash.gen dashboard.t $(MAINPARTS)
+	$(ACTION)
+
+dashboard2.html: _dashboard2.html dash.gen dashboard.t $(MAINPARTS)
 	$(ACTION)
 
 dashboard1.html: _dashboard1.html dash.gen dashboard.t $(MAINPARTS)
@@ -177,7 +182,7 @@ clean:
 	cd docs && make clean
 	cd libcurl && make clean
 	cd mail && make clean
-	cd mirror && make clean
 	cd rfc && make clean
 	cd dev && make clean
 	cd tiny && make clean
+	cd ch && make clean

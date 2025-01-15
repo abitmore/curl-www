@@ -2,8 +2,10 @@
 <html>
 <head> <title>curl shipped by Microsoft</title>
 #include "css.t"
+#include "term.t"
+</head>
 
- #define CURL_URL /windows/microsoft.html
+#define CURL_URL /windows/microsoft.html
 #define WINDOWS_MS
 
 #include "_menu.html"
@@ -14,7 +16,7 @@ WHERE3(Download, "/download.html", Windows downloads, "/windows/", Microsoft)
 TITLE(curl shipped by Microsoft)
 <div class="relatedbox">
 <b>Related:</b>
-<br><a href="/changes.html">Changelog</a>
+<br><a href="/ch/">Changelog</a>
 <br><a href="/download.html">Downloads</a>
 <br><a href="/docs/faq.html">FAQ</a>
 <br><a href="/docs/copyright.html">License</a>
@@ -29,18 +31,29 @@ TITLE(curl shipped by Microsoft)
 
 SUBTITLE(Windows 10/11 bundle curl)
 <p>
- All installs of Microsoft Windows 10 and Windows 11 get curl installed by
- default since then.
+ Every installation of Microsoft Windows 10 and Windows 11 has curl installed
+ by default.
 <p>
  The Microsoft provided version is built to use the Schannel TLS backend.
- Invoking curl -V in March 2023 shows this on these platforms:
+ Invoking curl -V after the <b>October 2024</b> update shows this on these
+ platforms:
 <p>
-<pre>
-curl 7.83.1 (Windows) libcurl/7.83.1 Schannel
-Release-Date: 2022-05-13
-Protocols: dict file ftp ftps http https imap imaps pop3 pop3s smtp smtps telnet tftp
-Features: AsynchDNS HSTS IPv6 Kerberos Largefile NTLM SPNEGO SSL SSPI UnixSockets
-</pre>
+<div class="term">
+<div class="tline">curl 8.9.1 (Windows) libcurl/8.9.1 Schannel zlib/1.3 WinIDN</div>
+<div class="tline">Release-Date: 2024-07-31</div>
+<div class="tline">Protocols: dict file ftp ftps http https imap imaps ipfs ipns mqtt pop3 pop3s smb smbs smtp smtps telnet tftp</div>
+<div class="tline">Features: alt-svc AsynchDNS HSTS HTTPS-proxy IDN IPv6 Kerberos Largefile libz NTLM SPNEGO SSL SSPI threadsafe Unicode UnixSockets</div>
+</div>
+
+SUBTITLE(Disabled features)
+<p>
+  The Microsoft curl build omits several good features:
+<ul>
+  <li> no Public Suffix List (PSL) support, making it impossible to prevent "super cookies"
+  <li> no support for HTTP/2 or HTTP/3
+  <li> no support for GOPHER(S), LDAP(S), RTMP, RTSP, SCP, SFTP, WS(S))
+  <li> no brotli or zstd compression
+</ul>
 
 SUBTITLE(Separate)
 <p>
@@ -58,7 +71,7 @@ SUBTITLE(A Powershell alias)
  The curl tool comes installed <i>in addition to</i> the
  dreaded <a href="https://daniel.haxx.se/blog/2016/08/19/removing-the-powershell-curl-alias/">curl
  alias</a> that plagues Powershell users since it is an alias that runs the
- invoke-webrequest command and therefore isn't acting much like curl at all.
+ invoke-webrequest command and therefore is not acting much like curl at all.
 <p>
  A work-around is to invoke curl as "curl.exe" to prevent powershell from
  treating it as an alias.

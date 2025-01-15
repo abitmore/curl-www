@@ -1,0 +1,57 @@
+#include "_doctype.html"
+<html>
+<head> <title>daily curl snapshots</title>
+#include "css.t"
+</head>
+
+#define CURL_URL /snapshots
+
+#include "_menu.html"
+#include "setup.t"
+
+WHERE2(Download, "/download.html", Daily Snapshots)
+
+TITLE(Daily curl snapshots)
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/auto/">Autobuilds</a>
+<br><a href="https://github.com/curl/curl">Browse git</a>
+<br><a href="/ch/">Changelog</a>
+<br><a href="/dev/release-notes.html">Dev Release Notes</a>
+<br><a href="/support.html">Support</a>
+</div>
+<p>
+ <b>WARNING</b>, these packages are built daily and automatically straight
+ from git. They may be broken, crashing, working or whatever. Do not assume
+ anything.
+
+SUBTITLE(Binary snapshots)
+<ul>
+<li><a href="https://github.com/pheiduck/curl-daily/releases">Arch Linux</a>
+<li><a href="https://github.com/curl/curl-container/pkgs/container/curl-container%2Fcurl">Docker</a>
+<li><a href="https://github.com/curl/curl-for-win/actions/workflows/daily.yml">Windows, macOS, Linux MUSL/glibc</a>
+</ul>
+
+<div style="float: left; width: 50%; margin-left: 2em;">
+SUBTITLE(Source tarballs)
+<p>
+#include "files.gen"
+</div>
+
+SUBTITLE(Contents)
+<p>
+ <b>docs/RELEASE-TOOLS.md</b> in the snapshots shows the tooling needed to
+ reproduce the snapshot tarball. This is not necessarily the same set of
+ tools+versions as official curl releases use, because these snapshots are
+ generated automatically on a different host.
+
+<p> <b>docs/tarball-commit.txt</b> in the snapshots shows the commit hash that
+ was the HEAD at the time the tarball was made.
+<p>
+ Updated: <b>
+#include "files-date.gen" 
+ </b>
+ 
+#include "_footer.html"
+</body>
+</html>

@@ -9,7 +9,7 @@ if test $? -gt "0"; then
   d="$(date +%Y-%m-%d)"
   cp cacert.pem "cacert-${d}.pem"
   sha256sum cacert.pem > cacert.pem.sha256
-  cp cacert.pem.sha256 "cacert-${d}.pem.sha256"
+  sed "s/cacert\.pem/cacert-${d}.pem/" < cacert.pem.sha256 > "cacert-${d}.pem.sha256"
   gzip -c cacert.pem > cacert.pem.gz
   xz -c cacert.pem > cacert.pem.xz
   perl ./listpem.pl > pemlist.gen

@@ -1,3 +1,14 @@
+VIDEO http in UEFI - using libcurl to write network applications
+EVENT UEFI Plugfest 2014
+URL https://www.youtube.com/watch?v=qYczGi8LV_o
+THUMB http-in-uefi.jpg
+THUMBSIZE width="250" height="141"
+DURATION 17 minutes
+DATE 2014-05-15
+WHO Kimon Berlin
+DESC This presentation demonstrates how easy it is to port cURL and libcurl to the UEFI pre-boot environment.
+ENDOFVIDEO
+
 VIDEO curl now and then
 EVENT curl-up 2017
 URL https://curl.se/video/curlup-2017/2017-03-18_01_Daniel_Stenberg_Curl_now_and_then_keynote.mp4
@@ -37,7 +48,7 @@ TAGS test suite, testing
 DESC The curl test suite and how testing is done in the project
 ENDOFVIDEO
 
-VIDEO Creating console oriented web sites
+VIDEO Creating console oriented websites
 EVENT curl-up 2017
 URL https://curl.se/video/curlup-2017/2017-03-18_04_Igor_Chubin_creating_console_oriented_web_sites.mp4
 THUMB creating-console-websites-2017.jpg
@@ -59,7 +70,7 @@ WHO Christian Schmitz
 DESC Experiences in writing a libcurl wrapper
 ENDOFVIDEO
 
-VIDEO The curl web site
+VIDEO The curl website
 EVENT curl-up 2017
 URL https://curl.se/video/curlup-2017/2017-03-18_06_Dan_Fandrich_Daniel_Stenberg_curl_website.mp4
 THUMB curl-website-2017.jpg
@@ -67,7 +78,7 @@ THUMBSIZE width="250" height="188"
 DURATION 29 minutes
 DATE 2017-03-18
 WHO Dan Fandrich and Daniel Stenberg
-DESC The curl web site and infrastructure
+DESC The curl website and infrastructure
 ENDOFVIDEO
 
 VIDEO How Google uses curl
@@ -169,7 +180,7 @@ THUMBSIZE width="250" height="188"
 DURATION 20 minutes
 DATE 2017-03-19
 WHO Stefan Eissing
-DESC How he uses curl to test Apache's HTTP/2 support
+DESC How he uses curl to test Apache is HTTP/2 support
 ENDOFVIDEO
 
 VIDEO Doing HTTP/2 with libcurl
@@ -369,7 +380,7 @@ THUMBSIZE width="250" height="141"
 DURATION 35 minutes
 DATE 2018-04-15
 WHO Lucas Pardue
-DESC Why there's an Alt-Svc header, how it works and how it changes everything
+DESC Why there is an Alt-Svc header, how it works and how it changes everything
 ENDOFVIDEO
 
 VIDEO Fuzzing curl
@@ -428,7 +439,7 @@ THUMBSIZE width="250" height="140"
 DURATION 12 minutes
 DATE 2019-03-30
 WHO Daniel Stenberg
-DESC How to deprecate things, what we're deprecating and how we introduce experimental features.
+DESC How to deprecate things, what we are deprecating and how we introduce experimental features.
 ENDOFVIDEO
 
 VIDEO Governance and money
@@ -482,7 +493,7 @@ VIDEO HTTP/3 in curl
 URL https://youtu.be/dKT3vlIw6bQ
 THUMB http3-in-curl.jpg
 THUMBSIZE width="250" height="140"
-DURATION 2h18 minutes
+DURATION 2h18
 DATE 2019-08-14
 WHO Daniel Stenberg
 DESC How to do, build and use HTTP/3 with curl
@@ -566,7 +577,7 @@ THUMB common-libcurl-mistakes.jpg
 THUMBSIZE width="250" height="140"
 DATE 2020-05-07
 SLIDES https://www.slideshare.net/bagder/common-mistakes-when-using-libcurl
-DURATION 1h2
+DURATION 1h02
 WHO Daniel Stenberg
 DESC Common mistakes users and application authors make when using libcurl
 ENDOFVIDEO
@@ -623,9 +634,9 @@ URL https://youtu.be/okGUxW_i9yk
 THUMB curl-hyper.jpg
 THUMBSIZE width="250" height="141"
 DATE 2021-02-11
-DURATION 1h1
+DURATION 1h01
 WHO Josh Aas, Sean McArthur, Daniel Stenberg
-DESC The motivation for and challenges with integrating the Hyper HTTP Rust back-end into curl.
+DESC The motivation for and challenges with integrating the Hyper HTTP Rust backend into curl.
 ENDOFVIDEO
 
 VIDEO cURL, FIPS, and Windows! Oh My!
@@ -667,7 +678,7 @@ URL https://youtu.be/T7Pv5lQ1dAc
 THUMB libcurl-under-hood.jpg
 THUMBSIZE width="250" height="140"
 DATE 2021-04-30
-DURATION 1h8
+DURATION 1h08
 WHO Daniel Stenberg
 DESC How libcurl works underneath the API and how transfers, connections etc are tied together with protocol handlers and the state machine.
 ENDOFVIDEO
@@ -806,5 +817,291 @@ THUMBSIZE width="250" height="140"
 DURATION 0h21
 DATE 2022-09-15
 WHO Sean McArthur
-DESC Brief recap of an HTTP backend in curl. What we've done, highlight community members that have fixed things. Ways curl has improved hyper, and vice versa. How anyone can join us, and try it out early. Sean is the lead developer of the Hyper project.
+DESC Brief recap of an HTTP backend in curl. What we have done, highlight community members that have fixed things. Ways curl has improved hyper, and vice versa. How anyone can join us, and try it out early. Sean is the lead developer of the Hyper project.
+ENDOFVIDEO
+
+VIDEO QUIC and HTTP/3 with curl and wolfSSL
+EVENT wolfSSL webinar
+URL https://youtu.be/SouvkGW0UZQ
+THUMB quic-and-wolfssl.jpg
+THUMBSIZE width="250" height="141"
+DATE 2023-04-06
+DURATION 40 minutes
+WHO Daniel Stenberg and Stefan Eissing
+DESC How HTTP/3 differs from HTTP/2 and HTTP/1, how to build libcurl to enable QUIC and how to perform transfers over QUIC using curl and libcurl.
+ENDOFVIDEO
+
+VIDEO Just curl it
+EVENT myConf 2023
+URL https://factor10.solidtango.com/watch/b28as4j3
+THUMB just-curl-it.jpg
+THUMBSIZE width="250" height="141"
+DURATION 0h47
+DATE 2023-05-11
+WHO Daniel Stenberg
+DESC curl has gradually found its way into virtually all Internet-connected devices on the globe. How did this happen?
+ENDOFVIDEO
+
+VIDEO Doing WebSocket with libcurl
+EVENT Twitch stream
+URL https://youtu.be/NLIhd0wYO24
+THUMB websocket-with-libcurl.jpg
+THUMBSIZE width="250" height="141"
+DURATION 0h49
+DATE 2023-06-16
+WHO Daniel Stenberg
+DESC WebSocket fundamentals (the protocol), how to enable it, the new API calls, example code, ideas to work on or fix for the future of WebSocket in curl
+ENDOFVIDEO
+
+VIDEO curl command line variables
+EVENT Twitch stream
+URL https://youtu.be/KzzrhLgCjik
+THUMB command-line-variables.jpg
+THUMBSIZE width="250" height="141"
+DURATION 0h36
+DATE 2023-08-02
+WHO Daniel Stenberg
+DESC curl 8.3.0 introduces a concept of using variables in command lines and config files. This video explains how it works and how to use them
+ENDOFVIDEO
+
+VIDEO Mastering the curl command line
+EVENT Twitch stream
+URL https://www.youtube.com/watch?v=V5vZWHP-RqU
+THUMB mastering-command-line.jpg
+THUMBSIZE width="250" height="141"
+DURATION 3h40
+DATE 2023-08-31
+SLIDES https://www.slideshare.net/DanielStenberg7/mastering-the-curl-command-linepdf
+WHO Daniel Stenberg
+DESC A comprehensive tutorial covering all aspects of using the curl command-line tool.
+ENDOFVIDEO
+
+VIDEO Next level curl
+EVENT 2023 Platform Summit
+URL https://www.youtube.com/watch?v=8b5jkr35CRQ
+THUMB next-level-curl.jpg
+THUMBSIZE width="250" height="141"
+DURATION 0h33
+DATE 2023-10-18
+WHO Daniel Stenberg
+DESC A look at some of the most powerful and interesting recent additions to curl—some lesser-known curl tricks that might enrich your command lines, extend your “tool belt” and make you more productive.
+ENDOFVIDEO
+
+VIDEO Mastering libcurl (part 1)
+EVENT Twitch stream
+URL https://youtu.be/ZQXv5v9xocU
+THUMB mastering-libcurl1.jpg
+THUMBSIZE width="250" height="141"
+DURATION 2h07
+DATE 2023-11-16
+SLIDES https://www.slideshare.net/bagder/mastering-libcurl-part-1
+WHO Daniel Stenberg
+DESC A comprehensive tutorial covering all aspects of writing applications using libcurl (part 1 of 2).
+ENDOFVIDEO
+
+VIDEO Mastering libcurl (part 2)
+EVENT Twitch stream
+URL https://youtu.be/9KqnXsSxqGA
+THUMB mastering-libcurl2.jpg
+THUMBSIZE width="250" height="141"
+DURATION 2h31
+DATE 2023-11-20
+SLIDES https://www.slideshare.net/bagder/mastering-libcurl-part-2
+WHO Daniel Stenberg
+DESC A comprehensive tutorial covering all aspects of writing applications using libcurl (part 2 of 2).
+ENDOFVIDEO
+
+VIDEO Getting started with libcurl in 2024
+EVENT wolfSSL webinar
+URL https://youtu.be/aS2eJDA5nSM
+THUMB getting-started-2024.jpg
+THUMBSIZE width="250" height="141"
+DATE 2024-03-28
+DURATION 1h01
+WHO Daniel Stenberg
+DESC Daniel Stenberg provides invaluable insights into the foundational concepts and best practices of libcurl.
+ENDOFVIDEO
+
+VIDEO The state of curl
+DATE 2024-05-04
+DESC Daniel talks about curl in 2024. Where are are. How we do.
+DURATION 2h08
+EVENT curl-up 2024
+THUMB the-state-of-curl-2024.jpg
+THUMBSIZE width="250" height="141"
+URL https://youtu.be/1X3IP-pvKTY
+WHO Daniel Stenberg
+SLIDES https://www.slideshare.net/slideshow/the-state-of-curl-2024-by-daniel-stenberg-from-curl-up-2024/268616911
+ENDOFVIDEO
+
+VIDEO Performance
+DATE 2024-05-05
+DESC Stefan talks about HTTP performance in curl over the last few years.
+DURATION 52 minutes
+EVENT curl-up 2024
+THUMB performance-2024.jpg
+THUMBSIZE width="250" height="141"
+URL https://youtu.be/4eBAzi7D_WM
+WHO Stefan Eissing
+SLIDES https://eissing.org/curlup-2024/performance/
+ENDOFVIDEO
+
+VIDEO curl container
+DATE 2024-05-04
+DESC James walks over the current state of curl containers
+DURATION 23 minutes
+EVENT curl-up 2024
+THUMB curl-container-2024.jpg
+THUMBSIZE width="250" height="141"
+URL https://youtu.be/a282rutQie4
+WHO James Fuller
+ENDOFVIDEO
+
+VIDEO rust in curl
+DATE 2024-05-05
+DESC Daniel talks about using libraries and backends with curl that are written in rust.
+DURATION 31 minutes
+EVENT curl-up 2024
+THUMB rust-in-curl.jpg
+THUMBSIZE width="250" height="141"
+URL https://youtu.be/D9LtMXLFgHw
+WHO Daniel Stenberg
+SLIDES https://www.slideshare.net/slideshow/rust-in-curl-by-daniel-stenberg-from-curl-up-2024/268617322
+ENDOFVIDEO
+
+VIDEO curl parallel tests
+DATE 2024-05-04
+DESC Dan talks about challenges in the curl test suite and how he made it test in parallel
+DURATION 41 minutes
+EVENT curl-up 2024
+THUMB curl-parallel-tests.jpg
+THUMBSIZE width="250" height="141"
+URL https://youtu.be/hknFmGwR7XI
+WHO Dan Fandrich
+ENDOFVIDEO
+
+VIDEO Apple Specialities
+DATE 2024-05-05
+DESC Christian talks about work he did for curl on Apple operating systems and related Apple specific details.
+DURATION 19 minutes
+EVENT curl-up 2024
+THUMB apple-specialities.jpg
+THUMBSIZE width="250" height="141"
+URL https://youtu.be/_k8N5uF84Dg
+WHO Christian Schmitz
+ENDOFVIDEO
+
+VIDEO curl future
+DATE 2024-05-05
+DESC Daniel talks about what might come next for curl.
+DURATION 31 minutes
+EVENT curl-up 2024
+THUMB curl-future-2024.jpg
+THUMBSIZE width="250" height="141"
+URL https://youtu.be/ngwvOw7Hgzo
+WHO Daniel Stenberg
+SLIDES https://www.slideshare.net/slideshow/curl-future-2024-by-daniel-stenberg-from-curl-up-2024/268617066
+ENDOFVIDEO
+
+VIDEO curl security
+DATE 2024-05-04
+DESC Daniel talks about what's happened in curl security recently.
+DURATION 56 minutes
+EVENT curl-up 2024
+THUMB curl-security-2024.jpg
+THUMBSIZE width="250" height="141"
+URL https://youtu.be/o40t02MysbU
+WHO Daniel Stenberg
+SLIDES https://www.slideshare.net/slideshow/curl-security-by-daniel-stenberg-from-curl-up-2024/268617478
+ENDOFVIDEO
+
+VIDEO fuzzing curl
+DATE 2024-05-04
+DESC James talks about and shows off his work on command line argument fuzzing.
+DURATION 43 minutes
+EVENT curl-up 2024
+THUMB fuzzing-curl-2024.jpg
+THUMBSIZE width="250" height="141"
+URL https://youtu.be/s4pZaI0dNmI
+WHO James Fuller
+ENDOFVIDEO
+
+VIDEO Test Clutch
+DATE 2024-05-05
+DESC Dan talks about his test results analytics system and the combat and struggle against flaky tests and failing CI jobs.
+DURATION 37 minutes
+EVENT curl-up 2024
+THUMB test-clutch.jpg
+THUMBSIZE width="250" height="141"
+URL https://youtu.be/TxNdAm845Ts
+WHO Dan Fandrich
+ENDOFVIDEO
+
+VIDEO trurl
+DATE 2024-05-05
+DESC Daniel talks about the new sibling in the curl project family. What it is and why it exists.
+DURATION 23 minutes
+EVENT curl-up 2024
+THUMB trurl.jpg
+THUMBSIZE width="250" height="141"
+URL https://youtu.be/UaZTKC3Sk4w
+WHO Daniel Stenberg
+SLIDES https://www.slideshare.net/slideshow/trurl-2024-by-daniel-stenberg-from-curl-up-2024/268617200
+ENDOFVIDEO
+
+VIDEO curl Evolutions
+DATE 2024-05-04
+DESC Stefan talks about the curl refactors and new concepts in protocol code in curl he has worked on the last few years.
+DURATION 59 minutes
+EVENT curl-up 2024
+THUMB curl-evolutions-2024.jpg
+THUMBSIZE width="250" height="141"
+URL https://youtu.be/X3PzLoZ7nB8
+WHO Stefan Eissing
+SLIDES https://eissing.org/curlup-2024/evolution/
+ENDOFVIDEO
+
+VIDEO Advanced libcurl
+EVENT wolfSSL webinar
+URL https://youtu.be/DQcFZEQ4Iyc
+THUMB advanced-libcurl-2024.jpg
+THUMBSIZE width="250" height="142"
+DATE 2024-06-13
+DURATION 51 minutes
+WHO Daniel Stenberg
+DESC This webinar is a must-watch for anyone eager to enhance their libcurl skills and explore its full potential.
+ENDOFVIDEO
+
+VIDEO You can do it
+EVENT PyCon Sweden 2024
+URL https://youtu.be/p-8of5cpspo
+THUMB you-can-do-it.jpg
+THUMBSIZE width="250" height="142"
+DATE 2024-06-22
+DURATION 1h1
+WHO Daniel Stenberg
+DESC In this keynote speech, Daniel shares some of the highlights (and lowlights) of running a successful Open Source project.
+ENDOFVIDEO
+
+VIDEO Mastering the curl command line
+EVENT Twitch stream
+URL https://www.youtube.com/watch?v=q_juztjhUlA
+THUMB mastering-command-line-2024.jpg
+THUMBSIZE width="250" height="141"
+DURATION 58 minutes
+DATE 2024-09-05
+SLIDES https://www.slideshare.net/slideshow/mastering-the-curl-command-line-with-daniel-stenberg/271595168
+WHO Daniel Stenberg
+DESC This talk goes through and focuses on some of the most powerful and interesting additions to curl done in recent years.
+ENDOFVIDEO
+
+VIDEO Getting started with libcurl
+EVENT wolfSSL webinar
+URL https://youtu.be/W-0yEqLMkwg
+THUMB getting-started-2024.jpg
+THUMBSIZE width="250" height="141"
+DATE 2025-01-09
+DURATION 48 minutes
+WHO Daniel Stenberg
+DESC An introduction to doing internet transfers using libcurl's easy API.
 ENDOFVIDEO

@@ -2,6 +2,7 @@
 <html>
 <head> <title>curl for Windows</title>
 #include "css.t"
+#include "term.t"
 <style type="text/css">
 a.windl {
   font-size: 200%;
@@ -24,7 +25,7 @@ WHERE2(Download, "/download.html", Windows downloads)
 TITLE(curl DEP_CURL for Windows)
 <div class="relatedbox">
 <b>Related:</b>
-<br><a href="/changes.html">Changelog</a>
+<br><a href="/ch/">Changelog</a>
 <br><a href="/download.html">Downloads</a>
 <br><a href="/docs/faq.html">FAQ</a>
 <br><a href="/docs/copyright.html">License</a>
@@ -39,29 +40,30 @@ TITLE(curl DEP_CURL for Windows)
  <b>curl version</b>: DEP_CURL <br>
  <b>Build</b>: CURL_WINDOWS_VERSION <br>
  <b>Date</b>: CURL_WIN64_ZIP_DATE <br>
- <b>Changes</b>: <a href="/changes.html#DEPU_CURL">DEP_CURL changelog</a>
+ <b>Changes</b>: <a href="/ch/DEP_CURL.html">DEP_CURL changelog</a><br>
+ <b>Supported Windows versions</b>: Vista, 7, 8, 10, 11
 
 <p class="windl">
   <a href="CURL_WIN64_ZIP"><img src="/pix/GS-Download-icon.svg" alt="Download 64-bit curl" width="90" height="90" style="float:left;"></a>
-
-<a href="CURL_WIN64_ZIP" class="windl">curl for 64-bit</a> <br>
+  <a href="CURL_WIN64_ZIP" class="windl">curl for 64-bit</a> <br>
 Size: CURL_WIN64_ZIP_SIZE<br>
 sha256: SHA256_CURL_WIN64
 
 #ifdef CURL_WIN64A_ZIP
 <p class="windl">
-  <a href="CURL_WIN64A_ZIP"><img src="/pix/GS-Download-icon.svg" alt="Download 64-bit (ARM) curl" width="90" height="90" style="float:left;"></a>
-
-<a href="CURL_WIN64A_ZIP" class="windl">curl for 64-bit (ARM)</a> <br>
+  <a href="CURL_WIN64A_ZIP"><img src="/pix/GS-Download-icon.svg" alt="Download 64-bit (ARM64) curl" width="90" height="90" style="float:left;"></a>
+  <a href="CURL_WIN64A_ZIP" class="windl">curl for 64-bit (ARM64)</a> <br>
 Size: CURL_WIN64A_ZIP_SIZE<br>
 sha256: SHA256_CURL_WIN64A
 #endif
 
+#ifdef CURL_WIN32_ZIP
 <p class="windl">
- <a href="CURL_WIN32_ZIP"><img src="/pix/GS-Download-icon.svg" alt="Download 32-bit curl" width="90" height="90" style="float:left;"></a>
- <a href="CURL_WIN32_ZIP" class="windl">curl for 32-bit</a> <br>
+  <a href="CURL_WIN32_ZIP"><img src="/pix/GS-Download-icon.svg" alt="Download 32-bit curl" width="90" height="90" style="float:left;"></a>
+  <a href="CURL_WIN32_ZIP" class="windl">curl for 32-bit</a> <br>
 Size: CURL_WIN32_ZIP_SIZE<br>
 sha256: SHA256_CURL_WIN32
+#endif
 
 SUBTITLE(Fixed URLs)
 <p>
@@ -69,9 +71,11 @@ SUBTITLE(Fixed URLs)
 <p>
 <a download="curl-win64-latest.zip" href="latest.cgi?p=win64-mingw.zip">curl for win64</a><br>
 #ifdef CURL_WIN64A_ZIP
-<a download="curl-win64a-latest.zip" href="latest.cgi?p=win64a-mingw.zip">curl for win64 ARM</a><br>
+<a download="curl-win64a-latest.zip" href="latest.cgi?p=win64a-mingw.zip">curl for win64 ARM64</a><br>
 #endif
+#ifdef CURL_WIN32_ZIP
 <a download="curl-win32-latest.zip" href="latest.cgi?p=win32-mingw.zip">curl for win32</a><br>
+#endif
 
 SUBTITLE(Specifications)
 <p>
@@ -85,6 +89,15 @@ DEP_PKGS
 <ul>
 DEP_TOOLS
 </ul>
+
+#ifdef CURL_WIN64_VERSION_1
+<div class="term">
+<div class="tline">CURL_WIN64_VERSION_1</div>
+<div class="tline">CURL_WIN64_VERSION_2</div>
+<div class="tline">CURL_WIN64_VERSION_3</div>
+<div class="tline">CURL_WIN64_VERSION_4</div>
+</div>
+#endif
 
 <p>
  The <a href="BUILD_LOGURL">log from the build</a>.

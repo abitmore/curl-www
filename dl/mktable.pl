@@ -110,14 +110,18 @@ for(@os) {
 
 print "<div class=\"oslinks\">\n";
 my $p=0;
-for(sort keys %os) {
+for(sort { lc($a) cmp lc($b) } keys %os) {
     if($_ ne "-") {
         if($p) {
             print "<br>\n";
         }
+        my $r= $osmap{$_};
+        if(!$r) {
+            $r = $_;
+        }
         my $anch=$_;
         $anch =~ s/[^a-zA-Z0-9]//g;
-        print "<a href=\"#$anch\">$_</a>";
+        print "<a href=\"#$anch\">$r</a>";
         $p++;
     }
 }
@@ -266,7 +270,7 @@ for $per (@sall) {
 
     my $contenttype;
     if ($$per{'size'} > 0) {
-        # If the file is served locally, or if it's a remote binary file
+        # If the file is served locally, or if it is a remote binary file
         # (which a known size indicates), include its content type in the link
         $contenttype=$formats{$$per{'pack'}};
         if ($contenttype) {

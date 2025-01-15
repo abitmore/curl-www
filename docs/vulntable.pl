@@ -4,13 +4,10 @@
 
 require "./vuln.pm";
 
-my $allvulns="allvulns.gen";
-
 # The amount of releases to include (0 == all)
 my $lastfew = $ARGV[0];
 if($lastfew < 1) {
     $lastfew = -1;
-    unlink($allvulns);
 }
 my $lastshow; # if $lastfew, this is the final release shown in the table
 
@@ -26,7 +23,8 @@ sub head {
     print "<tr class=\"tabletop\"><th>Version</th>";
     my $v=1;
     for(@vuln) {
-        my ($id, $start, $stop, $desc, $cve, $announce, $report, $cwe)=split('\|');
+        my ($id, $start, $stop, $desc, $cve, $announce, $report,
+            $cwe, $award, $area, $cissue, $tool, $severity)=split('\|');
 
         if($lastshow && ($lastshow > vernum($stop))) {
             # not a match!
@@ -42,6 +40,7 @@ sub head {
         $vulndesc[$v-1]=$desc;
         $cve[$v-1]=$cve;
         $cwe[$v-1]=$cwe;
+        $sev[$v-1]=$severity;
         printf("<th><a class=vuln title=\"$cve: $desc\" href=\"%s\">%02d</a></th>",
                $id, $num);
         $v++;
@@ -49,6 +48,14 @@ sub head {
     print "<th>Total</th>\n";
     print "</tr>\n";
     return $v-1;
+}
+
+sub sev2color {
+    my ($severity) = @_;
+    return 'green' if ($severity eq "low");
+    return 'blue' if ($severity eq "medium");
+    return 'red' if($severity eq "high");
+    return "black";
 }
 
 sub single {
@@ -62,38 +69,21 @@ sub single {
     my $vulnplural;
 
     if($vulnnum) {
-        $vulnhtml = "<table><tr class=\"tabletop\"><th>Flaw</th><th>From version</th><th>To and including</th><th>CVE</th><th>CWE</th></tr>";
+        $vulnhtml = "<table><tr class=\"tabletop\"><th>Flaw</th><th>From version</th><th>To and including</th></tr>";
 
         for my $i (@v) {
-            my $c = $cve[$i];
-            if($c ne "-") {
-                $c = "<a href=\"https://cve.mitre.org/cgi-bin/cvename.cgi?name=$c\">$c</a>";
-            }
-            else {
-                $c = "";
-            }
-            my $cstr="";
-            if($cwe[$i]) {
-                my $n = $cwe[$i];
-                if($n =~ /^CWE-(\d+)/) {
-                    $n = $1;
-                }
-                $cstr = "<a href=\"https://cwe.mitre.org/data/definitions/$n.html\">$cwe[$i]</a>";
-            }
-
-            $vulnhtml .= sprintf("<tr class=\"%s\"><td><a href=\"%s\">%s</a></td><td><a href=\"vuln-%s.html\">%s</a></td><td><a href=\"vuln-%s.html\">%s</a></td><td>$c</td><td>%s</td></tr>\n",
+            $vulnhtml .= sprintf("<tr class=\"%s\"><td><a href=\"%s\">%s</a></td><td><a href=\"vuln-%s.html\">%s</a></td><td><a href=\"vuln-%s.html\">%s</a></td></tr>\n",
                                  $odd&1?"even":"odd",
                                  $vurl[$i], $vulndesc[$i],
                                  $vstart[$i], $vstart[$i],
-                                 $vstop[$i], $vstop[$i],
-                                 $cstr);
+                                 $vstop[$i], $vstop[$i]);
             $odd++;
         }
         $vulnhtml .= "</table>";
     }
     else {
         # nothing known - yet
-        $vulnhtml = "<p> <big>Yay - there are no published security vulnerabilities for this version!</big>";
+        $vulnhtml = "<p> <strong>There are no published security vulnerabilities for this version.</strong>";
     }
 
     my $n = "<p>  See vulnerability summary for ";
@@ -113,10 +103,10 @@ sub single {
     $anchor =~ s/\./_/g;
 
     if($vulnnum == 1) {
-      $vulnplural = ' is';
+        $vulnplural = "";
     }
     else {
-      $vulnplural = 's are';
+        $vulnplural = "s";
     }
 
     open(T, "<_singlevuln.templ");
@@ -134,12 +124,20 @@ sub single {
     close(T);
     close(O);
 
-    if($lastfew == -1) {
-        # only create "all vulns" if we actually list all
-        open(A, ">>$allvulns");
-        print A "$str: $vulnnum\n";
-        close(A);
+    # create a JSON bundle for this release
+    open(O, ">vuln-$str.json");
+    print O "[\n";
+    my $c = 0;
+    for my $i (@v) {
+        open(S, "<$cve[$i].json");
+        print O <S>;
+        close(S);
+        print O ",\n" if($c != $#v);
+        $c++;
     }
+    print O "\]\n";
+    close(O);
+
 }
 
 my $l;
@@ -209,20 +207,21 @@ for my $str (@releases) {
         }
         else {
             if($col) {
-                printf("<td colspan=%d>&nbsp;</td>", $col);
+                printf("<td colspan=\"%d\">&nbsp;</td>", $col);
                 $col=0;
             }
             if(!$shown[$i]) {
                 # output only once, but use rowspan for the height
-                printf("<td valign=top style=\"background-color: red;\" title=\"%s: %s\" rowspan=%d onclick=\"window.location.href='%s'\">&nbsp;</td>",
-                       $cve[$i], $vulndesc[$i], $vercount[$i], $vurl[$i],);
+                printf("<td valign=top style=\"background-color: %s;\" title=\"%s: %s (%s)\" rowspan=\"%d\" onclick=\"window.location.href='%s'\">&nbsp;</td>",
+                       sev2color($sev[$i]),
+                       $cve[$i], $vulndesc[$i], $sev[$i], $vercount[$i], $vurl[$i],);
                 $shown[$i]=1;
             }
             $sum++;
         }
     }
     if($col) {
-        printf("<td colspan=%d>&nbsp;</td>", $col);
+        printf("<td colspan=\"%d\">&nbsp;</td>", $col);
     }
     printf "<td>%d</td></tr>\n", $sum;
 

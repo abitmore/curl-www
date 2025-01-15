@@ -1,7 +1,13 @@
 #include "_doctype.html"
 <html>
-<head> <title>curl - Security</title>
+<head> <title>curl - CVEs</title>
 #include "css.t"
+<style type="text/css">
+.contents {
+  max-width: 70%;
+  overflow: auto;
+}
+</style>
 </head>
 
 #define CURL_DOCS
@@ -12,50 +18,78 @@
 #include "setup.t"
 #include "_menu.html"
 
-WHERE3(Docs, "/docs/", Releases, "/docs/reldocs.html", Security)
+WHERE3(Docs, "/docs/", Releases, "/docs/reldocs.html", curl CVEs)
 
-TITLE(Security)
+TITLE(curl CVEs)
 #include "adv-related-box.inc"
 
-<p>
- We take security seriously and develop curl and libcurl to be secure and
- safe.
 <p>
  If you find or simply suspect a security problem in curl or libcurl, please
  file a detailed report on our <a href="https://hackerone.com/curl">hackerone
  page</a> and tell.
-<p>
- We appreciate getting notified in advance before you go public with security
- advisories for the sake of our users. We disclose security vulnerabilities in
- association with our fixes for them.
+
 <p>
  See also the <a href="vulnerabilities.html">Vulnerabilities Table</a> to see
  what versions that are vulnerable to what flaws.
 
-SUBTITLE(Security audit)
+SUBTITLE(Published vulnerabilities)
+
+<a href="security.html">All</a> |
+<a href="security-m.html">Medium+</a> |
+<a href="security-h.html">High+</a> |
+<a href="security-c.html">Critical</a>
 <p>
-  Trail of Bits performed a security audit of curl source code and internals
-  during the fall of 2022, summed up in these PDF documents. Published
-  December 21, 2022.
-<ul>
-  <li> <a href="audit/threatmodel-2022.pdf">Threat Model Report & Fix Review</a> (43 pages)
-  <li> <a href="audit/codereview-2022.pdf">Code Review & Testing Analysis</a> (58 pages)
-</ul>
 
-SUBTITLE(Past vulnerabilities)
-
+#if SEVERITY == 1
+(The table below has been filtered to show Medium+ severity)
+#include "seclist-m.gen"
+#elif SEVERITY == 2
+(The table below has been filtered to show High+ severity)
+#include "seclist-h.gen"
+#elif SEVERITY == 3
+(The table below has been filtered to show Critical severity)
+#include "seclist-c.gen"
+#else
+(The table below shows vulnerabilities of all severity levels)
 #include "seclist.gen"
+#endif
+SUBTITLE(C mistakes)
+
+<p>
+ Flaws listed as "C mistakes" are vulnerabilities that we deem
+ are <i>likely</i> to not have happened should we have used a memory-safe
+ language rather than C. The C mistakes are divided into the following areas:
+ OVERFLOW, OVERREAD, DOUBLE_FREE, USE_AFTER_FREE, NULL_MISTAKE, UNINIT and
+ BAD_FREE.
 
 SUBTITLE(Retracted security vulnerabilities)
 <p>
   Issues no longer considered curl security problems:
 <ul>
 <li> <a href="CVE-2019-15601.html">CVE-2019-15601</a> - SMB access smuggling via FILE URL on Windows
+<li> <a href="CVE-2023-32001.html">CVE-2023-32001</a> - fopen race condition
 </ul>
 
-SUBTITLE(curl vulnerabilities data as a CSV)
+SUBTITLE(Bogus security vulnerabilities)
 <p>
-  <a href="vuln.csv">vuln.csv</a> has all the info as the table above in a more machine friendly format.
+  Issues filed by others that are plain lies:
+<ul>
+<li> <a href="CVE-2020-19909.html">CVE-2020-19909</a>
+<li> <a href="CVE-2023-52071.html">CVE-2023-52071</a>
+</ul>
 
+
+SUBTITLE(curl vulnerability data)
+<p>
+ <a href="vuln.csv">vuln.csv</a> and <a href="vuln.json">vuln.json</a> provide
+ info about all vulnerabilities in machine friendly formats.
+<p>
+ Each vulnerability is also provided as a single JSON that you can access at
+ "https://curl.se/docs/$CVE.json" - replace $CVE with the actual curl CVE Id.
+
+<p>
+ The JSON output follows the <a href="https://ossf.github.io/osv-schema/">Open
+ Source Vulnerability format</a>
+ 
 #include "_footer.html"
 </body> </html>

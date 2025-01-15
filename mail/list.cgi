@@ -68,7 +68,7 @@ sub listarchives {
     my ($prefix, $listname)=@_;
 
     my $some_dir=".";
-    opendir(DIR, $some_dir) || die "can't opendir $some_dir: $!";
+    opendir(DIR, $some_dir) || die "cannot opendir $some_dir: $!";
     my @dirs = sort {$a cmp $b} grep { /^$prefix-/ && -d "$some_dir/$_" } readdir(DIR);
     closedir DIR;
 
@@ -114,6 +114,9 @@ MOO
     elsif($list eq "curl-meet") {
         $subscr = listarchives("meet", "curl-meet");
     }
+    elsif($list eq "curl-distros") {
+        $subscr = listarchives("distros", "curl-distros");
+    }
     elsif(($list eq "curl-announce") ||
           ($list eq "curl-www-commits") ||
           ($list eq "curl-commits")) {
@@ -122,7 +125,7 @@ MOO
         $none=1;
     }
     else {
-        print "$list? Are you playing with me? There's no such list!";
+        print "$list? Are you playing with me? There is no such list!";
         $none=1;
     }
 
@@ -143,7 +146,8 @@ MOO
 
     &title("More Mailing Lists");
 
-    my @archs=('curl-users',
+    my @archs=('curl-distros',
+               'curl-users',
                'curl-library',
                'curl-and-php',
                'curl-and-python',

@@ -1,6 +1,7 @@
 ROOT=..
 SRCROOT=../cvssource
 DOCROOT=$(SRCROOT)/docs
+INTERNALS=$(DOCROOT)/internals
 
 include $(ROOT)/mainparts.mk
 include $(ROOT)/setup.mk
@@ -156,11 +157,35 @@ CVELIST = \
  CVE-2023-27535.html \
  CVE-2023-27536.html \
  CVE-2023-27537.html \
- CVE-2023-27538.html
+ CVE-2023-27538.html \
+ CVE-2023-28319.html \
+ CVE-2023-28320.html \
+ CVE-2023-28321.html \
+ CVE-2023-28322.html \
+ CVE-2023-32001.html \
+ CVE-2020-19909.html \
+ CVE-2023-52071.html \
+ CVE-2023-38039.html \
+ CVE-2023-38545.html \
+ CVE-2023-38546.html \
+ CVE-2023-46218.html \
+ CVE-2023-46219.html \
+ CVE-2024-0853.html \
+ CVE-2024-2004.html \
+ CVE-2024-2379.html \
+ CVE-2024-2398.html \
+ CVE-2024-2466.html \
+ CVE-2024-6197.html \
+ CVE-2024-6874.html \
+ CVE-2024-7264.html \
+ CVE-2024-8096.html \
+ CVE-2024-9681.html \
+ CVE-2024-11053.html
 
 PAGES = \
  $(CVELIST) \
  alt-svc.html \
+ audits.html \
  bugbounty.html \
  bugs.html \
  caextract.html \
@@ -175,24 +200,29 @@ PAGES = \
  history.html \
  hsts.html \
  http-cookies.html \
- http2.html \
  http3.html \
  httpscripting.html \
  index.html \
  install.html \
+ ipfs.html \
  irc.html \
  knownbugs.html \
  libs.html \
  manpage.html \
- manual.html \
+ tutorial.html \
  mk-ca-bundle.html \
  mqtt.html \
+ optionsall.html \
+ optionswhen.html \
  projdocs.html \
  protdocs.html \
  reldocs.html \
  releases.csv \
  releases.html \
  security.html \
+ security-m.html \
+ security-h.html \
+ security-c.html \
  ssl-ciphers.html \
  ssl-compared.html \
  sslcerts.html \
@@ -204,6 +234,7 @@ PAGES = \
  url-syntax.html \
  versions.html \
  vuln.csv \
+ vuln.json \
  vulnerabilities.html \
  vulnall.html \
  websocket.html \
@@ -215,7 +246,7 @@ all: vuln.gen $(PAGES) vuln-make.gen
 
 clean:
 	-test -f vuln-make.gen && make -f vuln-make.gen clean
-	rm -f $(PAGES) *.gen
+	rm -f $(PAGES) *.gen *.json vuln-*.html
 
 vuln-make.gen: vuln.gen
 
@@ -240,13 +271,28 @@ whodocs.html: _whodocs.html $(MAINPARTS)
 libs.html: _libs.html $(MAINPARTS)
 	$(ACTION)
 
-manpage.html: _manpage.html $(MAINPARTS) mandump.gen $(ROOT)/manpage.t
+manpage.html: _manpage.html $(MAINPARTS) manoptionsdump.gen mandump.gen $(ROOT)/manpage.t
 	$(ACTION)
 
-curl.1: ../cvssource/docs/cmdline-opts/*.d
-	(cd ../cvssource/docs/cmdline-opts && perl gen.pl mainpage *.d) > curl.1
+manoptionsdump.gen:
+	perl generatemanmenu.pl $(DOCROOT)/cmdline-opts > manoptionsdump.gen
 
-mandump.gen: curl.1
+optionswhen.html: _optionswhen.html optionswhen.gen
+	$(ACTION)
+
+optionswhen.gen: $(DOCROOT)/options-in-versions optionswhen.pl
+	./optionswhen.pl $< > $@
+
+optionsall.html: _optionsall.html optionsall.gen
+	$(ACTION)
+
+optionsall.gen: $(DOCROOT)/options-in-versions alloptions.pl
+	./alloptions.pl $< > $@
+
+$(SRCROOT)/docs/cmdline-opts/curl.1:
+	cd $(DOCROOT) && make
+
+mandump.gen: $(SRCROOT)/docs/cmdline-opts/curl.1
 	 $(MAN2HTML) < $< > mandump.gen
 
 mk-ca-bundle.html: _mk-ca-bundle.html $(MAINPARTS) mkdump.gen $(ROOT)/manpage.t
@@ -299,8 +345,8 @@ thanks.html: _thanks.html $(MAINPARTS) thanks.gen thanksnum.gen
 thanksnum.gen: $(DOCROOT)/THANKS
 	egrep '^[^ $$]' $< | wc -l  | awk '{print "#define __THANKSNUM__ " $$1}' > $@
 
-thanks.gen: $(DOCROOT)/THANKS thanks.pl
-	egrep '^[^ $$]' $< | ./thanks.pl > $@
+thanks.gen: $(DOCROOT)/THANKS
+	grep '^[^ ]' $< | sort | sed -e 's/ /\&nbsp;/g' -e 's/-/\&\#8209/g' -e '$$!s/$$/\&nbsp;\&middot;/' > $@
 
 faq.html: _faq.shtml $(MAINPARTS) faq.gen
 	$(ACTION)
@@ -352,7 +398,7 @@ install.html: _install.html $(MAINPARTS) install.gen
 install.gen: $(DOCROOT)/INSTALL.md
 	$(MARKDOWN) < $< > $@
 
-manual.html: _manual.html $(MAINPARTS) manual.gen
+tutorial.html: _tutorial.html $(MAINPARTS) manual.gen
 	$(ACTION)
 
 manual.gen: $(DOCROOT)/MANUAL.md
@@ -401,12 +447,29 @@ ssl-ciphers.html: _ssl-ciphers.html $(MAINPARTS) ciphers.gen
 caextract.html: _caextract.html $(MAINPARTS) ../ca/pemlist.gen
 	$(ACTION)
 
-security.html: _security.html seclist.gen $(MAINPARTS) $(ADVBOX)
+audits.html: _audits.html $(MAINPARTS) $(ADVBOX)
 	$(ACTION)
-seclist.gen: vuln.pm listvulns.pl
-	./listvulns.pl > seclist.gen
 
-CVE-%.html: CVE-%.md $(MAINPARTS) advisory.t $(ADVBOX) curlver-to-vulnlink.pl
+security.html: _security.html seclist.gen $(MAINPARTS) $(ADVBOX)
+	fcpp $(FCPP_OPTS) -DSEVERITY=0 -I$(ROOT) -WWW -Uunix -P -H -C -V -LL $< $@
+security-m.html: _security.html seclist-m.gen $(MAINPARTS) $(ADVBOX)
+	fcpp $(FCPP_OPTS) -DSEVERITY=1 -I$(ROOT) -WWW -Uunix -P -H -C -V -LL $< $@
+security-h.html: _security.html seclist-h.gen $(MAINPARTS) $(ADVBOX)
+	fcpp $(FCPP_OPTS) -DSEVERITY=2 -I$(ROOT) -WWW -Uunix -P -H -C -V -LL $< $@
+security-c.html: _security.html seclist-c.gen $(MAINPARTS) $(ADVBOX)
+	fcpp $(FCPP_OPTS) -DSEVERITY=3 -I$(ROOT) -WWW -Uunix -P -H -C -V -LL $< $@
+
+seclist.gen: vuln.pm listvulns.pl vuln.pm $(CVELIST)
+	./listvulns.pl low > seclist.gen
+seclist-m.gen: vuln.pm listvulns.pl vuln.pm $(CVELIST)
+	./listvulns.pl medium > seclist-m.gen
+seclist-h.gen: vuln.pm listvulns.pl vuln.pm $(CVELIST)
+	./listvulns.pl high > seclist-h.gen
+seclist-c.gen: vuln.pm listvulns.pl vuln.pm $(CVELIST)
+	./listvulns.pl critical > seclist-c.gen
+
+CVE-%.html: CVE-%.md $(MAINPARTS) advisory.t $(ADVBOX) curlver-to-vulnlink.pl mk-adv-template.pl cve-checker.pl
+	@perl cve-checker.pl $<
 	$(MARKDOWN) < $< | perl curlver-to-vulnlink.pl | ./mk-adv-template.pl $@ | fcpp $(FCPP_OPTS) -I$(ROOT) -WWW -Uunix -P -H -C -V -LL - > $@
 
 vulnerabilities.html: _vulnerabilities.html vuln.gen $(MAINPARTS)
@@ -416,20 +479,17 @@ vulnall.html: _vulnall.html vuln0.gen $(MAINPARTS)
 
 vuln.gen: $(ROOT)/_changes.html ./vulntable.pl vuln.pm _singlevuln.templ
 	./vulntable.pl 25 < $< > $@
-vuln0.gen: $(ROOT)/_changes.html ./vulntable.pl vuln.pm _singlevuln.templ
+vuln0.gen: $(ROOT)/_changes.html ./vulntable.pl vuln.pm _singlevuln.templ vuln.json
 	./vulntable.pl < $< > $@
 
-allvulns.gen: $(ROOT)/_changes.html ./vulntable.pl vuln.pm _singlevuln.templ
-	./vulntable.pl < $< > $@
+allvulns.gen: $(ROOT)/_changes.html ./allvulns.pl vuln.pm
+	./allvulns.pl < $< > $@
 
 vuln.csv: vuln.pm
 	./vuln2csv.pl > $@
 
-http2.gen: $(SRCROOT)/docs/HTTP2.md
-	$(MARKDOWN) < $< > $@
-
-http2.html: _http2.html http2.gen $(MAINPARTS)
-	$(ACTION)
+vuln.json: vuln.pm vuln2json.pl $(CVELIST) releases.csv
+	./vuln2json.pl > $@
 
 http3.gen: $(SRCROOT)/docs/HTTP3.md
 	$(MARKDOWN) < $< > $@
@@ -437,25 +497,31 @@ http3.gen: $(SRCROOT)/docs/HTTP3.md
 http3.html: _http3.html http3.gen $(MAINPARTS)
 	$(ACTION)
 
-websocket.gen: $(SRCROOT)/docs/WEBSOCKET.md
+ipfs.gen: $(SRCROOT)/docs/IPFS.md
+	$(MARKDOWN) < $< > $@
+
+ipfs.html: _ipfs.html ipfs.gen $(MAINPARTS)
+	$(ACTION)
+
+websocket.gen: $(INTERNALS)/WEBSOCKET.md
 	$(MARKDOWN) < $< > $@
 
 websocket.html: _websocket.html websocket.gen $(MAINPARTS)
 	$(ACTION)
 
-mqtt.gen: $(SRCROOT)/docs/MQTT.md
+mqtt.gen: $(INTERNALS)/MQTT.md
 	$(MARKDOWN) < $< > $@
 
 mqtt.html: _mqtt.html mqtt.gen $(MAINPARTS)
 	$(ACTION)
 
-releases.html: _releases.html rel.gen $(MAINPARTS)
+releases.html: _releases.html rel.gen $(MAINPARTS) $(ROOT)/release.t
 	$(ACTION)
 
-rel.gen: $(ROOT)/_changes.html ./relinfo.pl vuln.pm allvulns.gen
+rel.gen: $(ROOT)/_changes.html ./relinfo.pl vuln.pm vuln0.gen
 	./relinfo.pl < $< > $@
 
-releases.csv: $(ROOT)/_changes.html ./relinfo.pl vuln.pm
+releases.csv: $(ROOT)/_changes.html ./relinfo.pl vuln.pm allvulns.gen
 	./relinfo.pl --raw < $< > $@
 
 thename.html: _thename.html $(MAINPARTS)

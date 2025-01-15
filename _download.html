@@ -18,12 +18,12 @@ WHERE1(Download)
 TITLE(Releases and Downloads)
 <div class="relatedbox">
 <b>Related:</b>
-<br><a href="/changes.html">Changelog</a>
+<br><a href="/ch/">Changelog</a>
 <br><a href="/download/">Old Releases</a>
 <br><a href="/dev/source.html">Source code repo</a>
 <br><a href="https://curl.se/snapshots/">Daily Snapshots</a>
 <br><a href="https://daniel.haxx.se/address.html">GPG Key</a>
-<br><a href="/docs/releases.html">Releaselog</a>
+<br><a href="/docs/releases.html">Release log</a>
 </div>
 <p>
  The curl project mostly provides source packages. Other packages are kindly
@@ -31,7 +31,7 @@ TITLE(Releases and Downloads)
 
 SUBTITLE(Source Archives)
 <p>
- <b>curl __STABLE</b>, Released on the DATE(__RELDATE). <a href="changes.html#__STABLETAG">Changelog for __STABLE</a>.
+ <b>curl __STABLE</b>, Released on the DATE(__RELDATE). <a href="/ch/__STABLE.html">Changelog for __STABLE</a>.
 
 <table class="download">
   <tr>
@@ -52,9 +52,11 @@ SUBTITLE(Source Archives)
   </tr>
 </table>
 
-SUBTITLE(Download Wizard)
+SUBTITLE(Long-term support)
 <p>
- Need help to select what to download? Use the <a href="//curl.se/dlwiz/">curl Download Wizard</a>!
+ There are long-term support curl releases
+ called <a href="https://rock-solid.curl.dev/">Rock-solid curl</a>, provided
+ as a commercial offer.
 
 SUBTITLE(Packages)
 <p>
@@ -65,13 +67,17 @@ SUBTITLE(Packages)
  </td></tr></table>
 <p>
  If you have newer archives or archives for platforms not already present in
- this table, we'd like to add them to this table with a pointer to your
+ this table, we would like to add them to this table with a pointer to your
  location. Mail <a href="mailto:curl-release&#64;haxx.se">curl-release</a> and
  tell us!
 
 SUBTITLE(Official curl docker images)
 <p>
-    The official curl docker images are available on Docker Hub: <a href="https://hub.docker.com/r/curlimages/curl">curlimages/curl</a>.
+    The official curl docker images are available at:
+    <ul>
+        <li><a href="https://quay.io/repository/curl/curl?tab=info">Quay.io</a>: > podman run quay.io/curl/curl:latest</li>
+        <li><a href="https://hub.docker.com/r/curlimages/curl">Docker hub</a>: > podman run curlimages/curl:latest</li>
+    </ul>
 
     #include "_footer.html"
 </body>

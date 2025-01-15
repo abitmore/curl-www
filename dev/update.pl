@@ -15,7 +15,7 @@ if(open(MD5, "<md5")) {
     close(MD5);
 }
 
-# if there's a logfile named 'p' now, it is new!
+# if there is a logfile named 'p' now, it is new!
 my $new=0;
 for(keys %logfile) {
     if($logfile{$_} eq "p") {
@@ -42,8 +42,9 @@ if(!$new) {
 }
 
 if($new) {
-    # first remove oldies
-    system('find inbox -mtime +12 -exec rm {} \;');
+    # remove oldies
+    system('find inbox -mtime +20 -name "inbox*" -exec rm {} \;');
+    system('find inbox -mtime +20 -name "build*" -exec rm {} \;');
 
     # build md5 checksum file
     system("md5sum inbox/inbox*log > md5");
@@ -51,9 +52,6 @@ if($new) {
     # build the summary
     system("./summarize.pl");
 }
-
-# get test keywords
-system("(cd ../cvssource/tests && ./keywords.pl) > keywords.t 2>/dev/null");
 
 # rebuild the HTML
 system("make -k >/dev/null 2>&1");

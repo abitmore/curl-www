@@ -2,6 +2,7 @@ ROOT=..
 
 SRCROOT=$(ROOT)/cvssource
 DOCROOT=$(SRCROOT)/docs
+INTERNALS=$(DOCROOT)/internals
 TESTROOT=$(SRCROOT)/tests
 LIBROOT=$(SRCROOT)/lib
 CURL=$(ROOT)
@@ -13,32 +14,33 @@ MAINPARTS += _menu.html
 MKRELNOTES = ./mk-release-notes.pl
 MAN2HTML = roffit --bare
 
-PAGES = \
- foot.html \
- head.html \
- howto.html \
- summary.html \
- missing.html \
- keywords.html \
- builds.html \
- release-notes.html \
- index.html \
- contribute.html \
- internals.html \
- testcurl.html \
- runtests.html \
- source.html \
- secprocess.html \
- roadmap.html \
- sourceactivity.html \
- release-procedure.html \
- code-style.html \
- deprecate.html \
- code-review.html \
- feature-window.html \
- new-protocol.html \
- test-fileformat.html \
- tests-overview.html
+PAGES =			\
+ advisory.html		\
+ builds.html		\
+ code-review.html	\
+ code-style.html	\
+ contribute.html	\
+ deprecate.html		\
+ feature-window.html	\
+ foot.html		\
+ head.html		\
+ howto.html		\
+ index.html		\
+ internals.html		\
+ keywords.html		\
+ missing.html		\
+ new-protocol.html	\
+ release-notes.html	\
+ release-procedure.html	\
+ roadmap.html		\
+ runtests.html		\
+ source.html		\
+ sourceactivity.html	\
+ summary.html		\
+ test-fileformat.html	\
+ testcurl.html		\
+ tests-overview.html    \
+ vuln-disclosure.html
 
 all: $(PAGES)
 
@@ -50,7 +52,7 @@ feature-window.html: _feature-window.html $(MAINPARTS) featurewindow.t
 
 new-protocol.html: _new-protocol.html $(MAINPARTS) new-protocol.gen
 	$(ACTION)
-new-protocol.gen: $(SRCROOT)/docs/NEW-PROTOCOL.md
+new-protocol.gen: $(INTERNALS)/NEW-PROTOCOL.md
 	$(MARKDOWN) < $< > $@
 
 test-fileformat.html: _test-fileformat.html $(MAINPARTS) fileformat.gen
@@ -73,7 +75,7 @@ roadmap.gen: $(SRCROOT)/docs/ROADMAP.md
 
 code-style.html: _code-style.html code-style.gen $(MAINPARTS)
 	$(ACTION)
-code-style.gen: $(SRCROOT)/docs/CODE_STYLE.md
+code-style.gen: $(INTERNALS)/CODE_STYLE.md
 	$(GITHUB) $< | sed -e 's:*:\&#42;:g' -e 's:#undef:\&#35;undef:g' \
 	-e 's:#define:\&#35;define:g' \
 	-e 's:#else:\&#35;else:g' \
@@ -82,13 +84,13 @@ code-style.gen: $(SRCROOT)/docs/CODE_STYLE.md
 
 testcurl.html: _testcurl.html $(MAINPARTS) testcurl.gen
 	$(ACTION)
-testcurl.gen: $(TESTROOT)/testcurl.1
-	$(MAN2HTML) < $< > $@
+testcurl.gen: $(TESTROOT)/testcurl.md
+	$(MARKDOWN) < $< > $@
 
 runtests.html: _runtests.html $(MAINPARTS) runtests.gen
 	$(ACTION)
-runtests.gen: $(TESTROOT)/runtests.1
-	$(MAN2HTML) < $< > $@
+runtests.gen: $(TESTROOT)/runtests.md
+	$(MARKDOWN) < $< > $@
 
 code-review.html: _code-review.html $(MAINPARTS) code-review.gen
 	$(ACTION)
@@ -110,9 +112,14 @@ internals.html: _internals.html $(MAINPARTS) internals.gen
 internals.gen: $(DOCROOT)/INTERNALS.md
 	$(MARKDOWN) < $< > $@
 
-secprocess.html: _security.html $(MAINPARTS) security.gen
+vuln-disclosure.html: _vuln-disclosure.html $(MAINPARTS) disclosure.gen
 	$(ACTION)
-security.gen: $(DOCROOT)/SECURITY-PROCESS.md
+disclosure.gen: $(DOCROOT)/VULN-DISCLOSURE-POLICY.md
+	$(MARKDOWN) < $< > $@
+
+advisory.html: _advisory.html $(MAINPARTS) advisory.gen
+	$(ACTION)
+advisory.gen: $(DOCROOT)/SECURITY-ADVISORY.md
 	$(MARKDOWN) < $< > $@
 
 foot.html: _foot.html $(MAINPARTS)

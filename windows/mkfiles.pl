@@ -36,25 +36,34 @@ sub filesize {
 my @alldeps;
 sub depversions {
     my ($dl) = @_;
-    open(D, "<$dl/build.txt");
+    open(D, "<$dl/urls.txt");
     my $tools;
     my $pkgs;
     while(<D>) {
-        if($_ =~ /^\.(.*)/) {
-            # tools
-            $tools .= "<li>$1";
-        }
-        elsif($_ =~ /^([^.]\S+) (\S+)/) {
-            my ($dep, $ver) = ($1, $2);
+        if($_ =~ /^(\S+) (\S+)( https:\/\/\S+)?( .+)?/) {
+            my ($dep, $ver, $url, $suff) = ($1, $2, $3, $4);
             if($dep eq 'curl') {
                 my $u = $ver;
                 $u =~ s/\./_/g;
                 printf("#define DEP_%s %s\n", uc($dep), $ver);
                 printf("#define DEPU_%s %s\n", uc($dep), $u);
             }
+            my $tool = 0;
+            if($dep =~ /^\.(.*)/) {
+                $dep =~ s/^\.//;
+                $tool = 1;
+            }
+            $ver = "$dep $ver";
+            chomp $ver;
+            if($url ne '') {
+                $url =~ s/^ //;
+                $ver = "<a href='$url'>$ver</a>"
+            }
+            if($tool == 1) {
+                $tools .= "<li>$ver$suff";
+            }
             else {
-                $pkgs .= "<li>$dep $ver";
-                chomp $pkgs;
+                $pkgs .= "<li>$ver$suff";
             }
         }
     }
@@ -96,6 +105,17 @@ sub getlog {
     printf "#define BUILD_LOGURL %s\n", $l[0];
 }
 
+sub getcurlv {
+    my ($dir)=@_; # where the download files are
+    open(L, "$dir/curl-version-x86_64.txt") || return;
+    my @l = <L>;
+    close(L);
+    chomp $l[0]; printf "#define CURL_WIN64_VERSION_1 %s\n", $l[0];
+    chomp $l[1]; printf "#define CURL_WIN64_VERSION_2 %s\n", $l[1];
+    chomp $l[2]; printf "#define CURL_WIN64_VERSION_3 %s\n", $l[2];
+    chomp $l[3]; printf "#define CURL_WIN64_VERSION_4 %s\n", $l[3];
+}
+
 my $dl = latest();
 
 my @files = getdl($dl);
@@ -117,10 +137,18 @@ for(@files) {
     }
 }
 
+sub num {
+    my ($t)=@_;
+    if($t =~ /^(\d)\.(\d+)\.(\d+)_(\d+)/) {
+        return 1000000*$1 + 10000*$2 + 100+$3 + $4;
+    }
+    return 0;
+}
+
 my $gen=0;
-for my $version (reverse sort @versions) {
+for my $version (reverse sort { num($a) <=> num($b) } @versions) {
     print "#define CURL_WINDOWS_VERSION $version\n";
-    if($version =~ /([0-9.]*)_(\d)/) {
+    if($version =~ /([0-9.]*)_(\d+)/) {
         $gen = $2;
     }
     print "#define CURL_PACKAGE_GEN $gen\n";
@@ -149,3 +177,5 @@ if($gen) {
 gethashes($dl);
 
 getlog($dl);
+
+getcurlv($dl);

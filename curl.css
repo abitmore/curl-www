@@ -101,6 +101,10 @@ td.newsdate {
   text-align: right;
 }
 
+code {
+    color: #2020a0;
+}
+
 .warning {
   font-size: 14pt;
   color: #000000;
@@ -205,8 +209,12 @@ span.whodate {
 }
 
 tr.odd {
-  color: #000000;
   background-color: #e0e0e0;
+}
+
+tr.hide {
+  color: #000000;
+  background-color: #a0a0a0;
 }
 
 /* a non-selected item in the main menu */
@@ -237,10 +245,16 @@ tr.odd {
 /* the top menu box */
 .menu {
   width: 100%;
+  background-image: url("/logo/curl-white-symbol.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
   background-color: #093754;
+  background-origin: content-box;
   text-align: center;
-  padding-top: .5em;
-  padding-bottom: .5em;
+  padding-top: .3em;
+  padding-bottom: .3em;
+  padding-left: .3em;
+  padding-right: .3em;
   line-height: 130%;
   font-size: 26px;
 }
@@ -301,7 +315,7 @@ div.quote {
   border-style: solid;
   border-width: thin;
   border-color: black;
-  padding: 2px 2px 2px 2px;
+  padding: 12px 12px 2px 12px;
 
   background-color: #f0f0ff;
   width: 90%;
@@ -354,7 +368,11 @@ div.yellowbox {
         margin-right: 5px;
     }
 }
-
+@media screen and (max-width: 1000px) {
+    .menu {
+        background-image: none;
+    }
+}
 /* Filtering menus on the autobuild page */
 .filtermenu {
   /* Position select box to the right of the text */
@@ -458,13 +476,24 @@ a.sitesearch:hover {
     background: #ffe0e0;
 }
 
+
+p.level0 {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+p.level1 {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
 /* DARK MODE PROPERTIES */
 /* These will override all settings above */
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #212121;
         /* Try to keep it a bit light but not too grey,
-           so it doesn't impact people with accessibility needs */
+           so it does not impact people with accessibility needs */
         color: #fbfbfb;
     }
 
@@ -483,6 +512,10 @@ a.sitesearch:hover {
 
     img:hover {
         background-color: #2c2c2c;
+    }
+
+    h1 {
+        border-color: white;
     }
 
     .dropdown-content {
@@ -515,6 +548,7 @@ a.sitesearch:hover {
     td.ostitle, .older2 {
         color: white;
         background-color: #212121;
+        border-bottom: 1px #999 solid;
     }
 
     .download2, div.quote {
@@ -523,6 +557,10 @@ a.sitesearch:hover {
 
     td.oslogo {
         background-color: white;
+    }
+
+    tr.odd {
+        background-color: #313131;
     }
 
     div.oslinks {
@@ -561,5 +599,9 @@ a.sitesearch:hover {
 
     div.sourceCode {
         background-color: #313131 !important;
+    }
+    code {
+        color: #aaaaff;
+        background-color: #111111 !important;
     }
 }

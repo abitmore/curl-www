@@ -17,19 +17,21 @@ WHERE1(Development)
 TITLE(Developing curl)
 <div style="float: right; width: 10em; margin-left: 20px;">
   The <b>Feature window</b> is now<br>
+  <a href="feature-window.html">
 #if FEATUREWINDOW
   <img src="../pix/open-sign.svg" alt="Featurewindow open"
 #else
   <br><img src="../pix/closed-sign.svg" alt="Featurewindow closed"
 #endif
         style="width: 15em;">
+  </a>
 </div>
 <p>
- This is the section of the web site devoted to the development of curl and
+ This is the section of the website devoted to the development of curl and
  libcurl. If you are just a "user" of curl or libcurl, this may not be where
  you want to hang out.
 <p>
- There is always development going on in the curl project.  To help out the
+ There is always development going on in the curl project. To help out the
  development team, we provide these services:
 
 SUBTITLE(Generated contents)
@@ -41,6 +43,8 @@ SUBTITLE(Generated contents)
 <li>
  <a href="builds.html">Automatic Builds</a> - We
  build curl automatically non-stop to verify that it builds and works. Learn <a href="howto.html">how to autobuild</a> and read the <a href="summary.html">autobuild stats</a>.
+<li> <a href="https://testclutch.curl.se/">Test Clutch</a> - the curl test run
+aggregation and analysis system.
 <li> <a href="/snapshots/">Daily Snapshot</a> - The latest
  version of curl, packaged and provided daily.
 <li> <a href="/gitstats/">git stats</a>, updated daily
@@ -57,7 +61,7 @@ SUBTITLE(Broadcasted commit info)
 the <a href="https://lists.haxx.se/listinfo/curl-commits">curl-commits</a>
 mailing list
 
-<li> A note is dropped in the #curl IRC channel
+<li> Via an <a href="https://github.com/curl/curl/commits/master.atom">RSS feed</a>
 
 </ul>
 
@@ -76,7 +80,7 @@ SUBTITLE(Work in progress)
  directly from git
 
 <li>
- Release calendar, pick your format:  <a href="https://www.google.com/calendar/ical/c9u5d64odop9js55oltfarjk6g%40group.calendar.google.com/public/basic.ics">ICAL</a>, <a href="https://www.google.com/calendar/embed?src=c9u5d64odop9js55oltfarjk6g%40group.calendar.google.com&ctz=Europe/Stockholm">HTML</a>
+ Release calendar, pick your format:  <a href="https://www.google.com/calendar/ical/c9u5d64odop9js55oltfarjk6g%40group.calendar.google.com/public/basic.ics">ICAL</a>, <a href="https://www.google.com/calendar/embed?src=c9u5d64odop9js55oltfarjk6g%40group.calendar.google.com&amp;ctz=Europe/Stockholm">HTML</a>
 
 </ul>
 
@@ -119,6 +123,9 @@ SUBTITLE(Developer Documentation)
   <a href="internals.html">Internals</a> describes how things work
   internally in curl, for code hackers, bug fixers and generally interested
   parties.
+
+<li>
+  Learn how to write a <a href="advisory.html">Security Advisory</a> for curl.
 
 <li> The <a href="/docs/knownbugs.html">KNOWN_BUGS</a> list.
 
